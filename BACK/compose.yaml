@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: WASTEFOOD
+      MYSQL_ROOT_PASSWORD: R@ttr4pagesPA
+      MYSQL_USER: root
+      MYSQL_PASSWORD: R@ttr4pagesPA
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root", "-pR@ttr4pagesPA"]
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    ports:
+      - "3307:3306"
+    volumes:
+      - database_data:/var/lib/mysql:rw
+
+volumes:
+  database_data:

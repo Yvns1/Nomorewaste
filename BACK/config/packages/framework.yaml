@@ -1,0 +1,18 @@
+# config/packages/framework.yaml
+
+framework:
+    secret: '%env(APP_SECRET)%'
+    csrf_protection: true
+    session: true
+    esi: true
+    fragments: true
+
+    router:
+        utf8: true
+        default_uri: '%env(resolve:APP_DEFAULT_ROUTE_URI)%'
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file
