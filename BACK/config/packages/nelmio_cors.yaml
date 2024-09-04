@@ -1,0 +1,18 @@
+nelmio_cors:
+    defaults:
+        allow_origin: ['http://localhost:3001', 'https://nomorewaste.fun', 'http://localhost:3000']
+        allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'DELETE']
+        allow_headers: ['content-type', 'authorization']
+        expose_headers: ['Link']
+        max_age: 3600
+    paths:
+        '^/api/':
+            allow_origin: ['http://localhost:3001', 'https://nomorewaste.fun', 'http://localhost:3000']
+            allow_headers: ['content-type', 'authorization']
+            allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'DELETE']
+            max_age: 3600
+        '^/login':
+            allow_origin: ['http://localhost:3001', 'https://nomorewaste.fun', 'http://localhost:3000']
+            allow_headers: ['content-type', 'authorization']
+            allow_methods: ['POST', 'OPTIONS']
+            max_age: 3600

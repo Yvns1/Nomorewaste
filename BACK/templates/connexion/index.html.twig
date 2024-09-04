@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="login-container" style="max-width: 400px; margin: 0 auto; padding: 1em; background-color: #3E2723; border-radius: 8px;">
+    <h2 style="text-align: center; color: #8BC34A; margin-bottom: 1.5em;">Connexion</h2>
+
+    {% if error %}
+        <div class="alert alert-danger" style="color: #ffeb3b; text-align: center;">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+
+    <form action="{{ path('app_login') }}" method="post">
+        <div class="form-group" style="margin-bottom: 1em;">
+            <label for="email" style="color: #8BC34A;">Email</label>
+            <input type="email" name="email" id="email" class="form-control" value="{{ last_username }}" required autofocus style="width: 100%; padding: 0.5em; border-radius: 4px; border: 1px solid #8BC34A;">
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1em;">
+            <label for="password" style="color: #8BC34A;">Mot de passe</label>
+            <input type="password" name="password" id="password" class="form-control" required style="width: 100%; padding: 0.5em; border-radius: 4px; border: 1px solid #8BC34A;">
+        </div>
+
+        <div class="form-check" style="margin-bottom: 1em;">
+            <input type="checkbox" name="_remember_me" id="remember_me" class="form-check-input" />
+            <label for="remember_me" class="form-check-label" style="color: #8BC34A;">Se souvenir de moi</label>
+        </div>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.75em; background-color: #8BC34A; color: #3E2723; border: none; border-radius: 4px;">Se connecter</button>
+    </form>
+</div>
+{% endblock %}

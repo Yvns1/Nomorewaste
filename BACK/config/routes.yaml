@@ -1,6 +1,15 @@
-controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
-a
+# config/routes.yaml
+
+# Route pour servir l'application React pour les pages principales
+react_routes:
+    path: /
+    controller: App\Controller\DefaultController::index
+    methods: GET
+
+# Ceci couvre toutes les routes frontend, sauf celles spécifiques à l'API
+
+# Routes API pour le backend
+api_admin_dashboard:
+    path: /api/back/admin_dashboard
+    controller: App\Controller\AdminController::index
+    methods: GET

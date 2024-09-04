@@ -1,0 +1,44 @@
+security:
+    password_hashers:
+        App\Entity\Utilisateurs:
+            algorithm: auto
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\Utilisateurs
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        api:
+            pattern: ^/api/
+            stateless: true
+            provider: app_user_provider
+            security: false # Désactiver toute forme d'authentification
+
+        main:
+            provider: app_user_provider
+            form_login:
+                login_path: /login
+                check_path: /login
+                username_parameter: email
+                password_parameter: mot_de_passe
+                default_target_path: /
+            logout:
+                path: /logout
+                target: /
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+                always_remember_me: false
+            lazy: true
+
+    access_control:
+        - { path: ^/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/list-conseils, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api, roles: IS_AUTHENTICATED_ANONYMOUSLY }
